@@ -1,6 +1,9 @@
 # EverQuest → Obsidian Inventory Importer
 
 PowerShell script that parses exported EverQuest inventory files and generates Markdown for your Obsidian vault.
+
+(Note: This is designed for Project P99 https://www.project1999.com)
+
 It creates:
 - Per-character inventory pages
 - A Planes of Mischief (PoM) cards summary
