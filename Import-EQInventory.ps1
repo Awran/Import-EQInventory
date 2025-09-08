@@ -352,14 +352,19 @@ $veliousGems = @(
     @{ Name = "Flawless Diamond"; Slot = "Melee Breastplate" }
     @{ Name = "Flawed Sea Sapphire"; Slot = "Melee Legs" },
     @{ Name = "Flawed Emerald"; Slot = "Melee Arms" },
+    @{ Name = "Flawed Topaz"; Slot = "Caster Arms" },
     @{ Name = "Crushed Black Marble"; Slot = "Melee Boots" },
     @{ Name = "Crushed Coral"; Slot = "Melee Helm" },
     @{ Name = "Crushed Flame Emerald"; Slot = "Melee Bracer, Priest Boots" },
+    @{ Name = "Crushed Flame Opal"; Slot = "Caster Helm" },
     @{ Name = "Crushed Jaundice Gem"; Slot = "Caster Boots" },
     @{ Name = "Crushed Lava Ruby"; Slot = "Priest Gloves" },
     @{ Name = "Crushed Onyx Sapphire"; Slot = "Caster Bracer, Priest Helm" },
     @{ Name = "Crushed Opal"; Slot = "Priest Bracer" },
-    @{ Name = "Crushed Topaz"; Slot = "Melee Gloves, Caster Gloves" }
+    @{ Name = "Crushed Topaz"; Slot = "Melee Gloves, Caster Gloves" },
+    @{ Name = "Chipped Onyx Sapphire"; Slot = "Priest Legs" },
+    @{ Name = "Nephrite"; Slot = "Caster Legs" },
+    @{ Name = "Jaundice Gem"; Slot = "Priest Arms" }
 
     # Add more if needed, or adjust for duplicates if you want to show all slots for a gem
 )
