@@ -14,8 +14,9 @@
 
     .DESCRIPTION
         This script processes EverQuest inventory text files and generates markdown files
-        for each character's inventory, a summary of PoM cards, and a global inventory summary.
-        The markdown files are formatted for use in Obsidian.
+        suitable for use in Obsidian. It summarizes equipped items, bank contents, general
+        slots, important items, PoM cards, keys, flowers of functionality, and velious gems.
+        It also creates a global inventory summary across all characters.
     .EXAMPLE
         Import-EQInventory.ps1
         This will run the script using the default directories defined in the script.
