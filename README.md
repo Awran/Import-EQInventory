@@ -21,7 +21,7 @@ It creates:
 ## Setup
 
 1. **First Run:**  
-   When you run the script for the first time, it will prompt you with a GUI to select your EverQuest log directory and your Obsidian vault path. These settings are saved to `settings.json` in the script folder for future runs.
+   When you run the script for the first time, it will prompt you with a GUI to select your EverQuest directory and your Obsidian vault path. These settings are saved to `settings.json` in the script folder for future runs.
 
 2. **Changing Settings:**  
    To change the EverQuest or Obsidian paths later, you can either:
