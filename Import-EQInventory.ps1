@@ -70,7 +70,6 @@ $settings = Get-Setting
 $EverQuestDirectory = $settings.everquest_log_directory
 $ObsidianVaultPath = $settings.obsidian_vault_path
 
-
 # --- Config ---
 $pomCardPatterns = @("Squire", "Knight", "Crown", "Throne")
 $pomCardRegex = [regex]::new("(?i)(\w+)\s+(Squire|Knight|Crown|Throne)$")
