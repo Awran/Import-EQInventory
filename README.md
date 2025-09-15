@@ -20,12 +20,16 @@ It creates:
 
 ## Setup
 
-1. Open `Import-EQInventory.ps1` and update the **Config** section near the top:
-   - `$EverQuestDirectory` — folder containing your `*-Inventory.txt` files
-   - `$ObsidianVaultPath` — your Obsidian vault root (or a subfolder inside it)
-   - `$wikiBaseUrl` — base URL for item links (defaults to Project 1999 wiki)
+1. **First Run:**  
+   When you run the script for the first time, it will prompt you with a GUI to select your EverQuest log directory and your Obsidian vault path. These settings are saved to `settings.json` in the script folder for future runs.
 
-2. Save the script.
+2. **Changing Settings:**  
+   To change the EverQuest or Obsidian paths later, you can either:
+   - Run the script with the `-UpdateSettings` switch to reprompt for new directories:
+     ```powershell
+     .\Import-EQInventory.ps1 -UpdateSettings
+     ```
+   - Or, delete `settings.json` and re-run the script.
 
 > **Tip:** If your execution policy blocks running scripts, launch a new PowerShell session and run:
 >
@@ -39,8 +43,12 @@ From PowerShell, run:
 ```powershell
 .\Import-EQInventory.ps1
 ```
+or, to update your EverQuest and Obsidian vault paths:
+```powershell
+.\Import-EQInventory.ps1 -UpdateSettings
+```
 
-The script will scan `$EverQuestDirectory` for `*-Inventory.txt` files and write Markdown files to `$ObsidianVaultPath`:
+The script will scan your configured EverQuest directory for `*-Inventory.txt` files and write Markdown files to your Obsidian vault:
 - `_PoM Cards.md`
 - `_Global Inventory.md`
 - `_Velious Gems.md`
@@ -55,12 +63,13 @@ General1	Crystallized Pumice	12345	2
 ## Roadmap / Ideas
 
 These are common next steps if you want to evolve the script (PRs welcome):
-- [ ] Convert top-level settings into **parameters** (e.g., `-EverQuestDirectory`, `-ObsidianVaultPath`, `-WikiBaseUrl`)
+- [x] Parameterization of top-level settings is now handled via `settings.json` and a first-run GUI prompt
 - [ ] Add `[CmdletBinding(SupportsShouldProcess)]`, `-WhatIf` / `-Confirm`, and `Write-Verbose`
-- [ ] Refactor lists (epics, keys, “important items”) into a JSON **config** file
 - [ ] Expose helper functions for **unit testing** (Pester)
 - [ ] Add data validation & improved error handling for missing/empty files
 - [ ] Optional: publish as a small **module**
+
+> **Note:** Refactoring the static item lists (epics, keys, important items) into a config file is not planned, as these values are stable and rarely change.
 
 ## Contributing
 
@@ -71,4 +80,3 @@ These are common next steps if you want to evolve the script (PRs welcome):
 ## License
 
 MIT — see [LICENSE](LICENSE).
-

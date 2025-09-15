@@ -5,8 +5,9 @@
         Created on:      2025-05-28
         Created by:      Scott L Howell
         Filename:        Import-EQInventory.ps1
-        Version:         0.1.2 - 2025-09-08
+        Version:         0.1.3 - 2025-09-15
         Change log:
+            0.1.3 - 2025-09-15 - Converted to use settings.json for paths
             0.1.2 - 2025-09-08 - Added Global Inventory summary and velious gems summary
             0.1.1 - 2025-05-30 - Added support for checking for epics in inventory
             0.1.0 - 2025-05-28 - Initial version
@@ -22,10 +23,55 @@
         This will run the script using the default directories defined in the script.
 #>
 
+param(
+    [switch]$UpdateSettings
+)
+# Reference the parameter to avoid 'declared but not used' error
+$null = $UpdateSettings
+
+# --- Settings JSON Integration ---
+$settingsPath = Join-Path $PSScriptRoot "settings.json"
+$wikiBaseUrl = "https://wiki.project1999.com/" # Still hardcoded
+
+function Show-Setting {
+    Add-Type -AssemblyName System.Windows.Forms
+
+    $eqFolderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog
+    $eqFolderBrowser.Description = "Select EverQuest Log Directory"
+    $null = $eqFolderBrowser.ShowDialog()
+    $eqDir = $eqFolderBrowser.SelectedPath
+
+    if (-not $eqDir) { throw "EverQuest directory not selected." }
+
+    $obsidianFolderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog
+    $obsidianFolderBrowser.Description = "Select Obsidian Vault Path"
+    $null = $obsidianFolderBrowser.ShowDialog()
+    $obsidianDir = $obsidianFolderBrowser.SelectedPath
+
+    if (-not $obsidianDir) { throw "Obsidian vault path not selected." }
+
+    $settings = @{
+        everquest_log_directory = $eqDir
+        obsidian_vault_path     = $obsidianDir
+    }
+    $settings | ConvertTo-Json | Set-Content $settingsPath
+    return $settings
+}
+
+function Get-Setting {
+    if ($UpdateSettings -or -not (Test-Path $settingsPath)) {
+        return Show-Setting
+    } else {
+        return Get-Content $settingsPath | ConvertFrom-Json
+    }
+}
+
+$settings = Get-Setting
+$EverQuestDirectory = $settings.everquest_log_directory
+$ObsidianVaultPath = $settings.obsidian_vault_path
+
+
 # --- Config ---
-$EverQuestDirectory = "<PATH TO EVERQUEST DIRECTORY>"
-$ObsidianVaultPath = "<PATH TO OBSIDIAN VAULT>"
-$wikiBaseUrl = "https://wiki.project1999.com/"
 $pomCardPatterns = @("Squire", "Knight", "Crown", "Throne")
 $pomCardRegex = [regex]::new("(?i)(\w+)\s+(Squire|Knight|Crown|Throne)$")
 $pomColors = @("Red", "Blue", "Black", "White")
